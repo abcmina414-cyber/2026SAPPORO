@@ -181,7 +181,7 @@
                 <div
                     class="absolute top-0 right-0 opacity-20 transform rotate-12 translate-x-4 -translate-y-2 text-6xl">
                     ❄️</div>
-                <h1 class="text-3xl font-bold tracking-tight drop-shadow-md">北海道❄️吉伊卡哇之旅</h1>
+                <h1 class="text-3xl font-bold tracking-tight drop-shadow-md">北海道❄️八天七夜</h1>
                 <p class="text-white/90 mt-1 text-sm font-medium">2026/03/05 (四) - 03/12 (四)</p>
             </header>
 
@@ -258,29 +258,27 @@
             "保暖用品 (暖暖包、口鼻/手部保暖)",
             "雪地墨鏡 (避免雪盲)",
             "止滑防水鞋/雪靴",
-            "個人藥品",
-            "旅遊轉換插頭/行動電源",
             "旅平險/網路卡",
             "滑雪裝備 (若有自備)",
         ];
 
         const hotelData = [
             {
-                name: "Resolution Trinity Sapporo",
+                name: "ホテルリソル トリニティ札幌 (Resolution Trinity Sapporo)",
                 dates: "3/5 - 3/7 (2晚)",
-                location: "札幌市",
+                location: "〒060-0042 北海道札幌市中央区大通西５丁目３ ホテル トリニティ札幌 1F",
                 mapLink: "https://www.google.com/maps/search/?api=1&query=Hotel+Resol+Trinity+Sapporo"
             },
             {
                 name: "登別まほろば (Noboribetsu Manseikaku)",
                 dates: "3/7 - 3/9 (2晚)",
-                location: "登別溫泉",
+                location: "〒059-0551 北海道登別市登別温泉町６５",
                 mapLink: "https://www.google.com/maps/search/?api=1&query=Hotel+Mahoroba+Noboribetsu"
             },
             {
-                name: "星野 TOMAMU 渡假村 (RISONA)",
+                name: "星野TOMAMU渡假村 (Hoshino Resorts TOMAMU)",
                 dates: "3/9 - 3/12 (3晚)",
-                location: "Tomamu",
+                location: "Nakatomamu, Shimukappu, Yufutsu District, Hokkaido 079-2204日本",
                 mapLink: "https://www.google.com/maps/search/?api=1&query=Hoshino+Resorts+RISONARE+Tomamu"
             }
         ];
@@ -289,70 +287,70 @@
             {
                 day: 1,
                 date: "3/5 (四)",
-                title: "啟程：札幌市區探索",
+                title: "札幌市區：大通公園電視塔、狸小路商店街",
                 items: [
-                    { time: "09:30", activity: "長榮航空出發 (EVAAIR)", notes: "登機前收公費，填寫VJW。" },
-                    { time: "14:05", activity: "抵達新千歲機場", notes: "預計 14:35 出關。搭乘巴士 (國際線 84 號乘車處) 前往札幌市區。" },
-                    { time: "16:00", activity: "抵達飯店 (Resolution Trinity Sapporo)", notes: "領取外套、購物袋後輕裝出門。" },
+                    { time: "09:30", activity: "長榮航空出發 (第二航廈)", notes: "登機前收公費，填寫VJW。" },
+                    { time: "14:05", activity: "抵達新千歲機場", notes: "預計 14:35 出關。搭乘巴士 (國內線 22 號乘車處) 前往札幌市區。" },
+                    { time: "16:00", activity: "抵達飯店 (Resolution Trinity Sapporo)", notes: "攜帶厚外套、購物袋" },
                     { time: "16:20", activity: "BISSE SWEETS (KINOTOYA)", notes: "品嚐水果蛋糕、起司塔、冰淇淋。人多可考慮放棄。" },
-                    { time: "16:40", activity: "札幌市時計台", notes: "整點報時。來不及可外觀打卡，$350円/人。" },
+                    { time: "16:40", activity: "札幌市時計台", notes: "營業到17時。來不及可外觀打卡就好，$350円/人。" },
                     { time: "16:50", activity: "札幌電視塔 展望台", notes: "日落約 17:30。與時計台有共通入場券 $1200円。" },
                     { time: "18:00", activity: "どんぐり 大通店", notes: "購買隔日早餐麵包。" },
-                    { time: "18:30", activity: "晚餐：牛しゃぶ牛すき禅", notes: "黑毛和牛或國產牛吃到飽/單點。可選壽喜燒/涮涮鍋 (+$300円)。記得預約！" },
+                    { time: "18:30", activity: "晚餐：牛しゃぶ牛すき禅", notes: "黑毛和牛或國產牛吃到飽/單點。4800円。可選壽喜燒/涮涮鍋 (+$300円)。記得預約！" },
                     { time: "20:00", activity: "狸小路商店街逛街", notes: "唐吉訶德 (24H)、札幌藥妝 (~23:00)。不想逛街可走地下道回飯店 (7分)。" },
                 ]
             },
             {
                 day: 2,
                 date: "3/6 (五)",
-                title: "札幌：甜點、動物與夜景",
+                title: "札幌市區：白色戀人公園、円山動物園、北海道神宮",
                 items: [
                     { time: "09:30", activity: "出發前往白色戀人公園", notes: "搭車至宮の沢站 (8站/16分)，2號出口步行 7 分。" },
-                    { time: "10:00", activity: "白色戀人公園", notes: "免費入場。製作鐵盒 (30分後領取, $1320円起)。可逛園區麵包店。" },
-                    { time: "11:00", activity: "午餐時間", notes: "園區內地下餐廳 **あんとるぽー (湯咖哩)**，或搭計程車 15 分往**場外市場うめぇ堂 (海鮮)**。" },
+                    { time: "10:00", activity: "白色戀人公園", notes: "團體票500円。製作鐵盒 (30分後領取, $1320円起)。可逛園區麵包店。" },
+                    { time: "11:00", activity: "午餐時間", notes: "園區內地下餐廳招牌湯咖哩 解膩茶拉西 (ラッシー)。" },
                     { time: "13:30", activity: "円山動物園", notes: "門票 $800円。營業至 16:30。從公園搭計程車約 16 分。" },
-                    { time: "16:00", activity: "北海道神宮", notes: "營業至 17:00。可品嚐神宮茶屋福レ餅、六花亭判官さま。" },
-                    { time: "19:00", activity: "晚餐：塩ホルモン 712 大通り本店", notes: "日式烤肉 (牛/羊/豬)。推薦 せんべろ套餐。記得預約！" },
-                    { time: "20:30", activity: "購物補貨", notes: "三越百貨 UNIQLO/PARCO B2 吉伊卡哇 (20:00 關門)、ジュンク堂書店 (21:00 關門)、唐吉訶德 (24H)。" },
+                    { time: "16:00", activity: "北海道神宮", notes: "可品嚐神宮茶屋福レ餅(壓扁的麻糬紅豆餅)，六花亭判官さま(紅豆麻糬沒壓扁版)。營業至 17:00。" },
+                    { time: "17:30", activity: "晚餐：塩ホルモン 712 大通り本店", notes: "日式烤肉 (牛/羊/豬)。推薦 せんべろ套餐。記得預約！" },
+                    { time: "20:30", activity: "逛街", notes: "不逛的人回飯店走3分鐘。三越百貨 UNIQLO、PARCO B2 吉伊卡哇 (20:00 關門)、ジュンク堂書店 (21:00 關門)、唐吉訶德 (24H)。" },
                 ]
             },
             {
                 day: 3,
                 date: "3/7 (六)",
-                title: "學術氣息與登別地獄谷",
+                title: "北海道大學、登別地獄谷",
                 items: [
-                    { time: "09:30", activity: "退房並寄放行李", notes: "準備移動至登別。" },
+                    { time: "09:30", activity: "退房寄行李", notes: "搭車兩站4分鐘到北十二條+步行10分，總路程約20分鐘。" },
                     { time: "10:00", activity: "北大 Marche Café & Labo", notes: "推千層麵 (ラザニア)、冰淇淋、布丁、咖啡拿鐵。用餐控制在一小時內。" },
-                    { time: "11:00", activity: "北海道大學博物館", notes: "參觀 3 樓標本區。12:45 離開前往車站。" },
-                    { time: "13:10", activity: "回飯店拿行李，前往札幌駅前巴士站", notes: "經由地下道移動，至 7 號乘車處 (日本生命札幌ビル前)。" },
+                    { time: "11:00", activity: "北海道大學博物館", notes: "12:45 前離開回飯店。" },
+                    { time: "13:10", activity: "回飯店拿行李，前往札幌駅前巴士站", notes: "從8號出口坐電梯到地下道，走10分-15分，札幌駅前７番のりば (日本生命札幌ビル前)。" },
                     { time: "13:40", activity: "搭乘高速おんせん号", notes: "往登別溫泉中央。車程約 2 小時，票價 $2500円。須一個月前預約。" },
-                    { time: "15:20", activity: "抵達登別まほろば", notes: "放完行李馬上去地獄谷。可租借長靴。商店街推薦道産子ぷりん、豆腐團子。" },
-                    { time: "17:00", activity: "溫泉時間 (登別まほろば)", notes: "B2 露天池女湯比較厲害。早上 04:00~10:00 會男女湯交換。" },
+                    { time: "15:20", activity: "抵達登別まほろば", notes: "放完行李馬上去地獄谷。遊客中心可租借長靴。商店街推薦道産子ぷりん、豆腐團子。" },
+                    { time: "17:00", activity: "回飯店泡湯", notes: "B2 露天池女湯比較厲害。早上 04:00~10:00 會男女湯交換。" },
                     { time: "18:30", activity: "晚餐", notes: "享用飯店內豐盛晚餐。" },
                 ]
             },
             {
                 day: 4,
                 date: "3/8 (日)",
-                title: "登別主題樂園：忍者與海洋",
+                title: "登別伊達時代村、登別尼克斯海洋公園",
                 items: [
                     { time: "07:30", activity: "早餐", notes: "享用飯店早餐。" },
-                    { time: "09:00", activity: "登別伊達時代村", notes: "團體票 $3000円。觀賞忍者秀 (09:40)、花魁秀 (10:15)、侍秀 (11:40)。可體驗手裡劍/弓箭 ($500円)。" },
-                    { time: "12:00", activity: "午餐", notes: "園區內：北京亭 (拉麵) 或 滿腹亭 (和食定食)。" },
-                    { time: "13:00", activity: "登別尼克斯海洋公園", notes: "團體票 $2700円。參觀城堡後，觀看企鵝 (14:15)、海豚 (14:45)、沙丁魚 (15:10)、海豹秀 (15:30)。" },
-                    { time: "16:30", activity: "回飯店休息", notes: "準備晚餐。" },
+                    { time: "09:00", activity: "登別伊達時代村", notes: "計程車10分鐘抵達。團體票 $3000円。觀賞忍者秀 (09:40)、花魁秀 (10:15)、侍秀 (11:40)。可體驗手裡劍/弓箭 ($500円)。" },
+            
+                    { time: "13:00", activity: "登別尼克斯海洋公園", notes: "計程車8分鐘抵達。團體票 $2700円。園內簡單吃午餐。參觀城堡後，觀看企鵝 (14:15)、海豚 (14:45)、沙丁魚 (15:10)、海豹秀 (15:30)。" },
+                    { time: "16:30", activity: "回飯店泡湯", notes: "" },
                     { time: "18:30", activity: "晚餐", notes: "享用飯店晚餐 (リバティ/グリーンテラス)。" },
                 ]
             },
             {
                 day: 5,
                 date: "3/9 (一)",
-                title: "棕熊、披薩與星野冰城",
+                title: "登別棕熊牧場，星野渡假村",
                 items: [
                     { time: "08:00", activity: "早餐", notes: "享用飯店早餐。" },
                     { time: "09:20", activity: "退房，前往熊牧場", notes: "向飯店預約免費接駁車至纜車站。熊牧場 09:30 營業。" },
-                    { time: "09:30", activity: "登別棕熊牧場", notes: "含纜車 $2600円。觀看鴨子競技 (10:00/11:00/12:00)、熊山舞台 (10:15/11:15)。" },
-                    { time: "12:00", activity: "午餐", notes: "**PIZZERIA ASTRA (披薩)**，需電話訂位 12:30 (推薦 M 尺寸 4 個/6 人)。或 閻魔軒 (拉麵)、溫泉市場 (海鮮)。" },
+                    { time: "09:30", activity: "登別棕熊牧場", notes: "含纜車 $2600円。觀看鴨子競技 (10:00)、熊表演 (10:45)(11:45)。" },
+                    { time: "12:00", activity: "午餐:披薩", notes: "PIZZERIA ASTRA高評價披薩店，電話訂位12:30。究極のマルゲリータ瑪格麗特/四種起司蜂蜜/ペパロニ義式香腸/豚ハムビスマルク火腿半熟蛋 (6人吃4個M尺寸) 、炸雞、低消飲料X1(推啤酒)" },
                     { time: "13:30", activity: "搭乘包車前往星野", notes: "車程約 2.5 小時，費用 $19300円/車。" },
                     { time: "16:00", activity: "抵達星野 TOMAMU 渡假村", notes: "辦理入住 (RISONA)。" },
                     { time: "17:30", activity: "愛絲冰城 (Ice Village)", notes: "溜滑梯、酒吧 ($1500円)。提早預約冰上溜索 (房客免費)。" },
@@ -384,7 +382,7 @@
                     { time: "10:30", activity: "卡丁車 (雪地)", notes: "90 分/$3500円。需網路預約，只有 30 台。" },
                     { time: "12:00", activity: "午餐：ビスターレ (尼泊爾咖哩)", notes: "教練推薦雞肉湯咖哩，在渡假中心附近。" },
                     { time: "13:00", activity: "下午活動二選一", notes: "① 滑雪 4 小時 (纜車券 $7000円)；② 雪地散步烤香腸 (或回飯店 Lounge 喝咖啡)。" },
-                    { time: "18:00", activity: "晚餐：森林餐廳", notes: "18:30 之後人會很多，建議提早。" },
+                    { time: "18:00", activity: "晚餐：森林餐廳", notes: "18:30 之後人會很多，建議提早。※7:30-8:30 Risonare大廳有演奏" },
                 ]
             },
             {
@@ -396,7 +394,7 @@
                     { time: "10:00", activity: "退房並搭乘接駁車", notes: "前往機場。" },
                     { time: "10:30", activity: "巴士 704 便 (直達)", notes: "12:55 抵達機場，最方便。" },
                     { time: "15:20", activity: "長榮航空起飛 (EVAAIR)", notes: "班機回程。" },
-                    { time: "19:05", activity: "抵達家鄉", notes: "旅途愉快！" },
+                    { time: "19:05", activity: "抵達台灣", notes: "旅途愉快！" },
                 ]
             }
         ];
@@ -675,8 +673,8 @@
                         重要提醒
                     </h3>
                     <ul class="text-sm text-gray-700 list-disc pl-5 space-y-2 marker:text-yellow-400">
-                        <li>攜帶現金: 每人最少 11萬日幣 💰。</li>
-                        <li>必備品: 泳衣 👙、海灘包、保暖用品 (暖暖包、口鼻/手部保暖) 🧣、雪地墨鏡 🕶️、止滑防水鞋 👢。</li>
+                        <li>一定要保旅平險!!有雪地活動、地滑危險、飛機可能被大雪延誤</li>
+                        <li>全程有泡湯+玩水行程，女生一定要避開經期。</li>
                         <li>服裝建議: 室內很熱，不要穿套頭衣 🥵。滑雪時避免穿發熱衣 ⛷️。</li>
                     </ul>
                 </section>
@@ -727,5 +725,6 @@
         });
     </script>
 </body>
+
 
 </html>
