@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北海道八天七夜之旅 - 行程</title>
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Google Fonts: Zen Maru Gothic (可愛圓體) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* 使用 Zen Maru Gothic 作為主要字體 */
+        :root {
+            --primary-color: #89CFF0;
+            /* Hachiware Blue */
+            --secondary-color: #FFB7C5;
+            /* Chiikawa Pink */
+            --accent-color: #FFFACD;
+            /* Usagi Yellow */
+            --bg-color: #FFF5F7;
+            /* Very light pink background */
+            --card-color: #ffffff;
+            --text-color: #4B5563;
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(#FFB7C5 15%, transparent 16%), radial-gradient(#89CFF0 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+        }
+
+        /* 天數切換 Tab 樣式 */
+        .day-tab {
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            @apply px-4 py-2 text-sm md:text-base font-semibold rounded-full shadow-md whitespace-nowrap;
+        }
+
+        .day-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(137, 207, 240, 0.4), 0 2px 4px -2px rgba(137, 207, 240, 0.4);
+        }
+
+        .day-tab:not(.active):hover {
+            @apply bg-pink-100 text-pink-600;
+        }
+
+        /* 資訊切換 Tab 樣式 (清單/飯店) */
+        .info-tab {
+            @apply flex items-center;
+        }
+
+        .active-info-tab {
+            background-color: #FEF3C7;
+            /* Yellow 100 */
+            color: #B45309;
+            /* Amber 800 */
+            border: 2px solid #FCD34D;
+            /* Yellow 300 */
+        }
+
+        .inactive-info-tab {
+            color: #6b7280;
+            /* Gray 500 */
+            background-color: transparent;
+        }
+
+        /* 垂直時間軸樣式 */
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            /* 40px */
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            /* 8px */
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #d1d5db;
+            /* Gray 300 */
+        }
+
+        .timeline-item:last-child::before {
+            height: 1.5rem;
+            /* 讓最後一個點之後的線段變短 */
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.2rem;
+            /* 16px */
+            height: 1.2rem;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            border: 3px solid white;
+            z-index: 10;
+            box-shadow: 0 0 0 3px var(--primary-color);
+        }
+
+        .timeline-dot.last-dot {
+            background-color: #9CA3AF;
+            box-shadow: 0 0 0 3px #9CA3AF;
+        }
+
+        /* 吉伊卡哇漂浮裝飾 */
+        .chiikawa-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 50;
+            animation: float 3s ease-in-out infinite;
+            background: white;
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--secondary-color);
+            display: flex;
+            gap: 5px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .chiikawa-float.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .chiikawa-float:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+
+<body class="p-0 m-0">
+
+    <!-- 吉伊卡哇漂浮元素 -->
+    <div id="backToTopBtn" class="chiikawa-float" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });"
+        title="回到頂部">
+        <span>🐹</span>
+        <span>🐱</span>
+        <span>🐰</span>
+    </div>
+
+    <div id="app" class="min-h-screen bg-transparent flex justify-center">
+        <div class="w-full max-w-2xl bg-white/90 backdrop-blur-sm shadow-xl border-x border-white">
+
+            <!-- 標題區塊 -->
+            <header
+                class="bg-gradient-to-r from-blue-400 to-pink-300 text-white p-6 rounded-b-3xl shadow-lg relative overflow-hidden">
+                <div
+                    class="absolute top-0 right-0 opacity-20 transform rotate-12 translate-x-4 -translate-y-2 text-6xl">
+                    ❄️</div>
+                <h1 class="text-3xl font-bold tracking-tight drop-shadow-md">北海道❄️吉伊卡哇之旅</h1>
+                <p class="text-white/90 mt-1 text-sm font-medium">2026/03/05 (四) - 03/12 (四)</p>
+            </header>
+
+            <!-- 摺疊式：清單與飯店資訊區塊 -->
+            <section class="bg-white p-4 pt-3 border-b border-gray-200">
+                <div class="flex space-x-4 mb-3 justify-center">
+                    <!-- 預設 'checklist' Tab 為 active style，但面板保持關閉 -->
+                    <button id="tab-checklist"
+                        class="info-tab px-4 py-1 text-sm font-medium rounded-full transition duration-150 active-info-tab"
+                        onclick="toggleInfoTab('checklist')">
+                        攜帶清單 <span id="chevron-checklist"
+                            class="ml-1 inline-block transition-transform duration-300 transform rotate-180">▼</span>
+                    </button>
+                    <button id="tab-hotels"
+                        class="info-tab px-4 py-1 text-sm font-medium rounded-full transition duration-150 inactive-info-tab"
+                        onclick="toggleInfoTab('hotels')">
+                        飯店資訊 <span id="chevron-hotels"
+                            class="ml-1 inline-block transition-transform duration-300 transform rotate-180">▼</span>
+                    </button>
+                    <button id="tab-tips"
+                        class="info-tab px-4 py-1 text-sm font-medium rounded-full transition duration-150 inactive-info-tab"
+                        onclick="toggleInfoTab('tips')">
+                        重要提醒 <span id="chevron-tips"
+                            class="ml-1 inline-block transition-transform duration-300 transform rotate-180">▼</span>
+                    </button>
+                </div>
+
+                <!-- Collapsible Content Area - max-h-0 確保預設是關閉的 -->
+                <div id="info-panel" class="overflow-hidden transition-all duration-500 ease-in-out max-h-0">
+                    <div id="checklist-content" class="info-content space-y-2 pt-2">
+                        <!-- Checklist content will be rendered here -->
+                    </div>
+
+                    <div id="hotels-content" class="info-content hidden space-y-4 pt-2">
+                        <!-- Hotel info will be rendered here -->
+                    </div>
+
+                    <div id="tips-content" class="info-content hidden space-y-4 pt-2">
+                        <!-- Tips info will be rendered here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- 天數切換按鈕選單 (水平滾動, 方便手機操作) -->
+            <nav class="sticky top-0 z-20 bg-white shadow-md p-3 overflow-x-auto">
+                <div id="day-tabs" class="flex space-x-3">
+                    <!-- JavaScript 會在此處生成按鈕 -->
+                </div>
+            </nav>
+
+            <!-- 行程內容區塊 -->
+            <main class="p-5 pb-24">
+                <div class="mb-6">
+                    <h2 id="current-day-title" class="text-2xl font-extrabold text-gray-800 mb-1"></h2>
+                    <p id="current-day-date" class="text-sm text-gray-500"></p>
+                </div>
+
+                <div id="itinerary-content" class="space-y-4">
+                    <!-- 行程時間軸會在此處渲染 -->
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+    <script>
+        // ------------------------
+        // 數據
+        // ------------------------
+        const checklistData = [
+            "護照及機票",
+            "現金 (日幣 11萬/人)",
+            "泳衣及海灘包 (用於 Mina-Mina Beach)",
+            "保暖用品 (暖暖包、口鼻/手部保暖)",
+            "雪地墨鏡 (避免雪盲)",
+            "止滑防水鞋/雪靴",
+            "個人藥品",
+            "旅遊轉換插頭/行動電源",
+            "旅平險/網路卡",
+            "滑雪裝備 (若有自備)",
+        ];
+
+        const hotelData = [
+            {
+                name: "Resolution Trinity Sapporo",
+                dates: "3/5 - 3/7 (2晚)",
+                location: "札幌市",
+                mapLink: "https://www.google.com/maps/search/?api=1&query=Hotel+Resol+Trinity+Sapporo"
+            },
+            {
+                name: "登別まほろば (Noboribetsu Manseikaku)",
+                dates: "3/7 - 3/9 (2晚)",
+                location: "登別溫泉",
+                mapLink: "https://www.google.com/maps/search/?api=1&query=Hotel+Mahoroba+Noboribetsu"
+            },
+            {
+                name: "星野 TOMAMU 渡假村 (RISONA)",
+                dates: "3/9 - 3/12 (3晚)",
+                location: "Tomamu",
+                mapLink: "https://www.google.com/maps/search/?api=1&query=Hoshino+Resorts+RISONARE+Tomamu"
+            }
+        ];
+
+        const itineraryData = [
+            {
+                day: 1,
+                date: "3/5 (四)",
+                title: "啟程：札幌市區探索",
+                items: [
+                    { time: "09:30", activity: "長榮航空出發 (EVAAIR)", notes: "登機前收公費，填寫VJW。" },
+                    { time: "14:05", activity: "抵達新千歲機場", notes: "預計 14:35 出關。搭乘巴士 (國際線 84 號乘車處) 前往札幌市區。" },
+                    { time: "16:00", activity: "抵達飯店 (Resolution Trinity Sapporo)", notes: "領取外套、購物袋後輕裝出門。" },
+                    { time: "16:20", activity: "BISSE SWEETS (KINOTOYA)", notes: "品嚐水果蛋糕、起司塔、冰淇淋。人多可考慮放棄。" },
+                    { time: "16:40", activity: "札幌市時計台", notes: "整點報時。來不及可外觀打卡，$350円/人。" },
+                    { time: "16:50", activity: "札幌電視塔 展望台", notes: "日落約 17:30。與時計台有共通入場券 $1200円。" },
+                    { time: "18:00", activity: "どんぐり 大通店", notes: "購買隔日早餐麵包。" },
+                    { time: "18:30", activity: "晚餐：牛しゃぶ牛すき禅", notes: "黑毛和牛或國產牛吃到飽/單點。可選壽喜燒/涮涮鍋 (+$300円)。記得預約！" },
+                    { time: "20:00", activity: "狸小路商店街逛街", notes: "唐吉訶德 (24H)、札幌藥妝 (~23:00)。不想逛街可走地下道回飯店 (7分)。" },
+                ]
+            },
+            {
+                day: 2,
+                date: "3/6 (五)",
+                title: "札幌：甜點、動物與夜景",
+                items: [
+                    { time: "09:30", activity: "出發前往白色戀人公園", notes: "搭車至宮の沢站 (8站/16分)，2號出口步行 7 分。" },
+                    { time: "10:00", activity: "白色戀人公園", notes: "免費入場。製作鐵盒 (30分後領取, $1320円起)。可逛園區麵包店。" },
+                    { time: "11:00", activity: "午餐時間", notes: "園區內地下餐廳 **あんとるぽー (湯咖哩)**，或搭計程車 15 分往**場外市場うめぇ堂 (海鮮)**。" },
+                    { time: "13:30", activity: "円山動物園", notes: "門票 $800円。營業至 16:30。從公園搭計程車約 16 分。" },
+                    { time: "16:00", activity: "北海道神宮", notes: "營業至 17:00。可品嚐神宮茶屋福レ餅、六花亭判官さま。" },
+                    { time: "19:00", activity: "晚餐：塩ホルモン 712 大通り本店", notes: "日式烤肉 (牛/羊/豬)。推薦 せんべろ套餐。記得預約！" },
+                    { time: "20:30", activity: "購物補貨", notes: "三越百貨 UNIQLO/PARCO B2 吉伊卡哇 (20:00 關門)、ジュンク堂書店 (21:00 關門)、唐吉訶德 (24H)。" },
+                ]
+            },
+            {
+                day: 3,
+                date: "3/7 (六)",
+                title: "學術氣息與登別地獄谷",
+                items: [
+                    { time: "09:30", activity: "退房並寄放行李", notes: "準備移動至登別。" },
+                    { time: "10:00", activity: "北大 Marche Café & Labo", notes: "推千層麵 (ラザニア)、冰淇淋、布丁、咖啡拿鐵。用餐控制在一小時內。" },
+                    { time: "11:00", activity: "北海道大學博物館", notes: "參觀 3 樓標本區。12:45 離開前往車站。" },
+                    { time: "13:10", activity: "回飯店拿行李，前往札幌駅前巴士站", notes: "經由地下道移動，至 7 號乘車處 (日本生命札幌ビル前)。" },
+                    { time: "13:40", activity: "搭乘高速おんせん号", notes: "往登別溫泉中央。車程約 2 小時，票價 $2500円。須一個月前預約。" },
+                    { time: "15:20", activity: "抵達登別まほろば", notes: "放完行李馬上去地獄谷。可租借長靴。商店街推薦道産子ぷりん、豆腐團子。" },
+                    { time: "17:00", activity: "溫泉時間 (登別まほろば)", notes: "B2 露天池女湯比較厲害。早上 04:00~10:00 會男女湯交換。" },
+                    { time: "18:30", activity: "晚餐", notes: "享用飯店內豐盛晚餐。" },
+                ]
+            },
+            {
+                day: 4,
+                date: "3/8 (日)",
+                title: "登別主題樂園：忍者與海洋",
+                items: [
+                    { time: "07:30", activity: "早餐", notes: "享用飯店早餐。" },
+                    { time: "09:00", activity: "登別伊達時代村", notes: "團體票 $3000円。觀賞忍者秀 (09:40)、花魁秀 (10:15)、侍秀 (11:40)。可體驗手裡劍/弓箭 ($500円)。" },
+                    { time: "12:00", activity: "午餐", notes: "園區內：北京亭 (拉麵) 或 滿腹亭 (和食定食)。" },
+                    { time: "13:00", activity: "登別尼克斯海洋公園", notes: "團體票 $2700円。參觀城堡後，觀看企鵝 (14:15)、海豚 (14:45)、沙丁魚 (15:10)、海豹秀 (15:30)。" },
+                    { time: "16:30", activity: "回飯店休息", notes: "準備晚餐。" },
+                    { time: "18:30", activity: "晚餐", notes: "享用飯店晚餐 (リバティ/グリーンテラス)。" },
+                ]
+            },
+            {
+                day: 5,
+                date: "3/9 (一)",
+                title: "棕熊、披薩與星野冰城",
+                items: [
+                    { time: "08:00", activity: "早餐", notes: "享用飯店早餐。" },
+                    { time: "09:20", activity: "退房，前往熊牧場", notes: "向飯店預約免費接駁車至纜車站。熊牧場 09:30 營業。" },
+                    { time: "09:30", activity: "登別棕熊牧場", notes: "含纜車 $2600円。觀看鴨子競技 (10:00/11:00/12:00)、熊山舞台 (10:15/11:15)。" },
+                    { time: "12:00", activity: "午餐", notes: "**PIZZERIA ASTRA (披薩)**，需電話訂位 12:30 (推薦 M 尺寸 4 個/6 人)。或 閻魔軒 (拉麵)、溫泉市場 (海鮮)。" },
+                    { time: "13:30", activity: "搭乘包車前往星野", notes: "車程約 2.5 小時，費用 $19300円/車。" },
+                    { time: "16:00", activity: "抵達星野 TOMAMU 渡假村", notes: "辦理入住 (RISONA)。" },
+                    { time: "17:30", activity: "愛絲冰城 (Ice Village)", notes: "溜滑梯、酒吧 ($1500円)。提早預約冰上溜索 (房客免費)。" },
+                    { time: "19:30", activity: "冰城煙火", notes: "推薦在溜冰台觀看，視野佳。" },
+                    { time: "20:00", activity: "晚餐", notes: "美食街：**GARAKU (湯咖哩)** 或 **成吉思汗燒肉** (~22:00)。" },
+                ]
+            },
+            {
+                day: 6,
+                date: "3/10 (二)",
+                title: "星野：雪地活動與豪華晚餐",
+                items: [
+                    { time: "08:00", activity: "早餐：森林餐廳", notes: "營業時間 06:30~10:00 (供餐至 09:30)。" },
+                    { time: "11:30", activity: "香蕉船", notes: "3KM/15分/$2600円。需 09:00 至 GAO 預約。或在雪盆公園玩雪。" },
+                    { time: "12:30", activity: "午餐：農場咖啡", notes: "GAO 中心旁，推薦乳酪蛋糕。" },
+                    { time: "13:30", activity: "雪上摩托車", notes: "8KM/40分/$8000円。12 人輪流體驗。" },
+                    { time: "15:00", activity: "微笑海灘 (Mina-Mina Beach) + 溫泉", notes: "可租借 SUP/泳圈 (SUP $1200円/30分, 泳圈 $1500円/無限輪換)。" },
+                    { time: "18:30", activity: "晚餐：HAL 自助餐 (螃蟹/鮭魚)", notes: "需預約，用餐時間 90 分鐘。" },
+                    { time: "20:30", activity: "水之教會", notes: "21:25 最終入場。" },
+                ]
+            },
+            {
+                day: 7,
+                date: "3/11 (三)",
+                title: "星野：卡丁車與滑雪體驗",
+                items: [
+                    { time: "07:30", activity: "早餐：SORA", notes: "Check-in 時預約。" },
+                    { time: "09:00", activity: "霧冰平台 (纜車)", notes: "房客可免費搭乘？" },
+                    { time: "10:30", activity: "卡丁車 (雪地)", notes: "90 分/$3500円。需網路預約，只有 30 台。" },
+                    { time: "12:00", activity: "午餐：ビスターレ (尼泊爾咖哩)", notes: "教練推薦雞肉湯咖哩，在渡假中心附近。" },
+                    { time: "13:00", activity: "下午活動二選一", notes: "① 滑雪 4 小時 (纜車券 $7000円)；② 雪地散步烤香腸 (或回飯店 Lounge 喝咖啡)。" },
+                    { time: "18:00", activity: "晚餐：森林餐廳", notes: "18:30 之後人會很多，建議提早。" },
+                ]
+            },
+            {
+                day: 8,
+                date: "3/12 (四)",
+                title: "告別北海道，準備回家",
+                items: [
+                    { time: "08:00", activity: "早餐：森林餐廳", notes: "最後一次享用飯店早餐。" },
+                    { time: "10:00", activity: "退房並搭乘接駁車", notes: "前往機場。" },
+                    { time: "10:30", activity: "巴士 704 便 (直達)", notes: "12:55 抵達機場，最方便。" },
+                    { time: "15:20", activity: "長榮航空起飛 (EVAAIR)", notes: "班機回程。" },
+                    { time: "19:05", activity: "抵達家鄉", notes: "旅途愉快！" },
+                ]
+            }
+        ];
+
+        // ------------------------
+        // 核心渲染邏輯
+        // ------------------------
+
+        let currentDay = 1;
+        let activeInfoTab = 'checklist'; // 預設選中清單 Tab
+        let isInfoPanelOpen = false; // 預設為關閉
+
+        /**
+         * 渲染指定日期的行程內容
+         * @param {number} dayIndex - 行程數據陣列的索引 (0-7)
+         */
+        function renderItinerary(dayIndex) {
+            const dayData = itineraryData[dayIndex];
+            const contentDiv = document.getElementById('itinerary-content');
+            const titleElement = document.getElementById('current-day-title');
+            const dateElement = document.getElementById('current-day-date');
+
+            // 更新標題和日期
+            titleElement.textContent = `Day ${dayData.day}: ${dayData.title}`;
+            dateElement.textContent = `日期: ${dayData.date}`;
+
+            // 清空舊內容
+            contentDiv.innerHTML = '';
+
+            // 渲染時間軸
+            dayData.items.forEach((item, index) => {
+                const isLast = index === dayData.items.length - 1;
+
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'timeline-item';
+
+                // 時間點 (Dot)
+                const dotSpan = document.createElement('span');
+                dotSpan.className = `timeline-dot ${isLast ? 'last-dot' : ''}`;
+
+                // 行程卡片
+                const cardDiv = document.createElement('div');
+                // 互動效果：hover 放大
+                cardDiv.className = 'bg-white p-4 rounded-xl shadow-lg border border-gray-100 transform hover:scale-[1.01] transition-transform duration-200 ease-out';
+
+                const timeP = document.createElement('p');
+                timeP.className = 'text-lg font-extrabold text-[#89CFF0] mb-1 flex items-center';
+                // 時鐘 SVG
+                timeP.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l3 3a1 1 0 001.414-1.414L11 9.586V6z" clip-rule="evenodd" />
+                                </svg>${item.time}`;
+
+                const activityH = document.createElement('h3');
+                activityH.className = 'text-xl font-bold text-gray-700';
+                activityH.textContent = item.activity;
+
+                if (item.notes) {
+                    const notesP = document.createElement('p');
+                    notesP.className = 'text-sm text-gray-600 mt-2 p-3 bg-[#FFF5F7] border-l-4 border-[#FFB7C5] rounded-r-xl';
+                    notesP.textContent = `備註: ${item.notes}`;
+                    cardDiv.appendChild(notesP);
+                }
+
+                cardDiv.prepend(activityH);
+                cardDiv.prepend(timeP);
+                itemDiv.appendChild(dotSpan);
+                itemDiv.appendChild(cardDiv);
+                contentDiv.appendChild(itemDiv);
+            });
+
+            // 確保滾動到頂部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /**
+         * 切換顯示的天數
+         * @param {number} day - 要切換到的天數 (1-8)
+         */
+        function showDay(day) {
+            currentDay = day;
+            const dayIndex = day - 1;
+
+            // 移除所有按鈕的 active 狀態
+            document.querySelectorAll('.day-tab').forEach(btn => {
+                btn.classList.remove('active', 'bg-[#89CFF0]', 'text-white');
+                btn.classList.add('bg-gray-100', 'text-gray-700');
+            });
+
+            // 設置當前按鈕為 active 狀態
+            const activeBtn = document.getElementById(`day-btn-${day}`);
+            if (activeBtn) {
+                activeBtn.classList.add('active', 'bg-[#89CFF0]', 'text-white');
+                activeBtn.classList.remove('bg-gray-100', 'text-gray-700');
+
+                // 滾動選單，讓活動按鈕置中
+                activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+
+            // 渲染新的行程
+            renderItinerary(dayIndex);
+        }
+
+        /**
+         * 切換清單/飯店 Tab 顯示並處理摺疊/展開
+         * @param {string} tabId - 'checklist' 或 'hotels'
+         */
+        function toggleInfoTab(tabId) {
+            const panel = document.getElementById('info-panel');
+            const tabs = document.querySelectorAll('.info-tab');
+            const contents = document.querySelectorAll('.info-content');
+
+            // 1. 處理內容切換：如果點擊的不是當前活動的 Tab，則切換內容
+            if (activeInfoTab !== tabId) {
+                activeInfoTab = tabId;
+                // 確保切換內容時，panel.scrollHeight 能計算正確的新內容高度
+                contents.forEach(content => {
+                    if (content.id === `${activeInfoTab}-content`) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                });
+                // 切換內容後，強制展開面板 (如果面板是關閉的)
+                if (!isInfoPanelOpen) {
+                    isInfoPanelOpen = true;
+                }
+            } else {
+                // 2. 處理摺疊/展開狀態：如果點擊的是當前活動的 Tab，則切換開啟狀態
+                isInfoPanelOpen = !isInfoPanelOpen;
+            }
+
+            // 3. 處理面板高度 (摺疊/展開)
+            if (isInfoPanelOpen) {
+                // 展開: 設置一個足夠大的高度值 (scrollHeight 是內容實際高度)
+                // 使用 setTimeout 確保 panel.scrollHeight 計算的是新內容的高度
+                setTimeout(() => {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }, 0);
+            } else {
+                // 摺疊: 設置為 0
+                panel.style.maxHeight = "0";
+            }
+
+            // 4. 更新 Tab 外觀和 Chevron 箭頭
+            tabs.forEach(tab => {
+                const currentTabId = tab.id.split('-')[1]; // 'checklist' or 'hotels'
+                const isCurrentTab = currentTabId === activeInfoTab;
+                const chevron = document.getElementById(`chevron-${currentTabId}`);
+
+                // Tab 外觀
+                if (isCurrentTab) {
+                    tab.classList.add('active-info-tab');
+                    tab.classList.remove('inactive-info-tab');
+                } else {
+                    tab.classList.remove('active-info-tab');
+                    tab.classList.add('inactive-info-tab');
+                }
+
+                // Chevron 箭頭方向 (只有活動的 Tab 箭頭會根據 isInfoPanelOpen 改變)
+                if (chevron) {
+                    if (isCurrentTab) {
+                        if (isInfoPanelOpen) {
+                            chevron.classList.remove('rotate-180'); // 指向下 (開啟)
+                            chevron.classList.add('rotate-0');
+                        } else {
+                            chevron.classList.add('rotate-180'); // 指向上 (關閉)
+                            chevron.classList.remove('rotate-0');
+                        }
+                    } else {
+                        // 非活動 Tab 的箭頭預設朝上 (表示點擊會切換並展開)
+                        chevron.classList.add('rotate-180');
+                        chevron.classList.remove('rotate-0');
+                    }
+                }
+            });
+        }
+
+        /**
+         * 從 localStorage 載入清單勾選狀態
+         */
+        function loadChecklistState() {
+            const savedState = localStorage.getItem('checklistState');
+            return savedState ? JSON.parse(savedState) : {};
+        }
+
+        /**
+         * 儲存清單勾選狀態到 localStorage
+         */
+        function saveChecklistState(index, checked) {
+            const state = loadChecklistState();
+            state[index] = checked;
+            localStorage.setItem('checklistState', JSON.stringify(state));
+        }
+
+        /**
+         * 渲染攜帶清單
+         */
+        function renderChecklist() {
+            const container = document.getElementById('checklist-content');
+            const savedState = loadChecklistState();
+
+            container.innerHTML = `
+                <h3 class="flex items-center text-sm font-bold text-amber-700 mb-2 border-b pb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    出發前勾選確認
+                </h3>
+                <div class="grid grid-cols-2 gap-2 text-sm text-gray-700">
+                ${checklistData.map((item, index) => `
+                    <label class="flex items-center space-x-2 bg-white p-2 rounded-xl cursor-pointer hover:bg-pink-50 border border-transparent hover:border-pink-200 transition-all">
+                        <input type="checkbox" 
+                               class="form-checkbox text-[#FFB7C5] rounded focus:ring-pink-300" 
+                               data-index="${index}"
+                               ${savedState[index] ? 'checked' : ''}>
+                        <span>${item}</span>
+                    </label>
+                `).join('')}
+                </div>
+            `;
+
+            // 為所有 checkbox 添加事件監聽器
+            container.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    const index = this.getAttribute('data-index');
+                    saveChecklistState(index, this.checked);
+                });
+            });
+        }
+
+        /**
+         * 渲染飯店資訊
+         */
+        function renderHotels() {
+            const container = document.getElementById('hotels-content');
+            container.innerHTML = `
+                <h3 class="flex items-center text-sm font-bold text-amber-700 mb-2 border-b pb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                    </svg>
+                    住宿地點與日期
+                </h3>
+                <div class="space-y-3">
+                ${hotelData.map(hotel => `
+                    <div class="p-4 bg-white rounded-xl shadow-sm border border-blue-100 hover:shadow-md transition-all">
+                        <p class="text-base font-bold text-[#89CFF0] hover:text-blue-400 transition duration-150">
+                            <a href="${hotel.mapLink}" target="_blank" rel="noopener noreferrer" class="flex items-center">
+                                ${hotel.name}
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                            </a>
+                        </p>
+                        <p class="text-sm text-gray-600 mt-1 flex items-center">
+                            <span class="mr-1">📅</span> 入住日期: ${hotel.dates}
+                        </p>
+                        <p class="text-xs text-gray-400 mt-1 flex items-center">
+                            <span class="mr-1">📍</span> 地點: ${hotel.location}
+                        </p>
+                    </div>
+                `).join('')}
+                </div>
+            `;
+        }
+
+        /**
+         * 渲染旅行小提醒
+         */
+        function renderTips() {
+            const container = document.getElementById('tips-content');
+            container.innerHTML = `
+                <section class="p-4 bg-yellow-50 rounded-xl border border-yellow-200 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 text-6xl opacity-10 rotate-12">🐰</div>
+                    <h3 class="flex items-center text-sm font-bold text-yellow-700 mb-2 border-b border-yellow-200 pb-1">
+                        <span class="text-lg mr-1">✨</span>
+                        重要提醒
+                    </h3>
+                    <ul class="text-sm text-gray-700 list-disc pl-5 space-y-2 marker:text-yellow-400">
+                        <li>攜帶現金: 每人最少 11萬日幣 💰。</li>
+                        <li>必備品: 泳衣 👙、海灘包、保暖用品 (暖暖包、口鼻/手部保暖) 🧣、雪地墨鏡 🕶️、止滑防水鞋 👢。</li>
+                        <li>服裝建議: 室內很熱，不要穿套頭衣 🥵。滑雪時避免穿發熱衣 ⛷️。</li>
+                    </ul>
+                </section>
+            `;
+        }
+
+
+        /**
+         * 初始化天數選擇按鈕
+         */
+        function initializeTabs() {
+            const tabsContainer = document.getElementById('day-tabs');
+            itineraryData.forEach(dayData => {
+                const button = document.createElement('button');
+                button.id = `day-btn-${dayData.day}`;
+                button.className = 'day-tab bg-gray-100 text-gray-700';
+                // 顯示 Day X (星期Y)
+                button.textContent = `Day ${dayData.day} (${dayData.date.split('(')[1].replace(')', '')})`;
+                button.onclick = () => showDay(dayData.day);
+                tabsContainer.appendChild(button);
+            });
+
+            // 渲染輔助資訊
+            renderChecklist();
+            renderHotels();
+            renderTips();
+
+            // 預設狀態：面板保持關閉 (max-height: 0)，只需確保 'checklist' 內容被載入
+            // 不需要呼叫 toggleInfoTab，因為 isInfoPanelOpen 已經是 false
+
+            // 預設顯示第一天
+            showDay(currentDay);
+        }
+
+        // 頁面載入完成後執行初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeTabs();
+
+            // 監聽滾動事件，控制回到頂部按鈕的顯示
+            const backToTopBtn = document.getElementById('backToTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
